@@ -75,9 +75,11 @@ export const cartSlice = createSlice({
       state.carts = carts;
       state.totalHarga = totalHarga;
       state.totalQty = totalQty;
-    }
+    },
+    doDeleteCart: (state) => state,
+    doAddCart: (state) => state,
   }
 });
 
-export const { doGetCart, doAddQty, doMinusQty } = cartSlice.actions;
+export const { doGetCart, doAddQty, doMinusQty, doDeleteCart, doAddCart } = cartSlice.actions;
 export default cartSlice.reducer;
