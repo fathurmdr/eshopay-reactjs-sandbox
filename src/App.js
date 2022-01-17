@@ -1,4 +1,5 @@
 import CartList from "./views/cart/cartList";
+import CartListToolkit from "./views/cart/CartListToolkit";
 import "./App.css";
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
       <CounterHook/> 
       <CartList/>*/}
 
-      <CartList />
+      <CartListToolkit />
     </>
   );
 }

@@ -6,15 +6,15 @@ import {
   doMinusQty,
   doAddCart,
   doDeleteCart
-} from "../../redux/actions/cartAction";
+} from "../../redux-toolkit/features/cartSlice";
 
-export default function CartList() {
+export default function CartListToolkit() {
   const dispatch = useDispatch();
-  const carts = useSelector((state) => state.carts);
+  const carts = useSelector((state) => state.cartStore.carts);
   const category = useSelector((state) => state.category);
   const listOfSubCategory = useSelector((state) => state.subCategory);
-  const totalQty = useSelector((state) => state.totalQty);
-  const totalHarga = useSelector((state) => state.totalHarga);
+  const totalQty = useSelector((state) => state.cartStore.totalQty);
+  const totalHarga = useSelector((state) => state.cartStore.totalHarga);
 
   const [subCategory, setSubCategory] = useState([]);
   const [display, setDisplay] = useState(false);
@@ -59,6 +59,8 @@ export default function CartList() {
     ];
     setSubCategory(categoryFilter);
   };
+
+  const onCheckItem = (item) => () => {};
 
   const onSubmit = (event) => {
     event.preventDefault();
