@@ -11,8 +11,8 @@ import {
 export default function CartListToolkit() {
   const dispatch = useDispatch();
   const carts = useSelector((state) => state.cartStore.carts);
-  const category = useSelector((state) => state.category);
-  const listOfSubCategory = useSelector((state) => state.subCategory);
+  const category = useSelector((state) => state.cartStore.category);
+  const listOfSubCategory = useSelector((state) => state.cartStore.subCategory);
   const totalQty = useSelector((state) => state.cartStore.totalQty);
   const totalHarga = useSelector((state) => state.cartStore.totalHarga);
 

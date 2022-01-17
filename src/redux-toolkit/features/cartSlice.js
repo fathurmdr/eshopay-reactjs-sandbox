@@ -30,12 +30,26 @@ const listOfCart = [
   }
 ];
 
+const listOfCategory = ["Fashion", "Komputer", "Handphone"];
+
+const listOfSubCategory = [
+  { subname: "Baju Muslim", category: "Fashion" },
+  { subname: "Kaos", category: "Fashion" },
+  { subname: "Tablet", category: "Handphone" },
+  { subname: "Casing", category: "Handphone" },
+  { subname: "Laptop", category: "Komputer" },
+  { subname: "Memory DDR3", category: "Komputer" }
+];
+
 export const cartSlice = createSlice({
   name: "cart",
   initialState: {
     carts: [...listOfCart],
-    totalHarga: 0,
-    totalQty: 0
+    totalHarga: [...listOfCart].reduce((sum, el) => sum + el.subTotal, 0),
+    totalQty: [...listOfCart].reduce((sum, el) => sum + el.qty, 0),
+    category: [...listOfCategory],
+    subCategory: [...listOfSubCategory],
+    productChecked: []
   },
 
   reducers: {
@@ -62,7 +76,7 @@ export const cartSlice = createSlice({
       const carts = [
         ...state.carts.map((cart) => {
           if (action.payload.id === cart.prodId) {
-            cart.qty = cart.qty + 1;
+            cart.qty = cart.qty - 1;
             cart.subTotal = cart.price * cart.qty;
             return cart;
           } else {
@@ -76,10 +90,33 @@ export const cartSlice = createSlice({
       state.totalHarga = totalHarga;
       state.totalQty = totalQty;
     },
-    doDeleteCart: (state) => state,
-    doAddCart: (state) => state,
+    doDeleteCart: (state, action) => {
+      const carts = [
+        ...state.carts.filter((el) => el.prodId !== action.payload.id)
+      ];
+      state.carts = carts;
+      state.totalHarga = state.carts.reduce((sum, el) => sum + el.subTotal, 0);
+      state.totalQty = state.carts.reduce((sum, el) => sum + el.qty, 0);
+    },
+    doAddCart: (state, action) => {
+      state.carts = [...state.carts, action.payload];
+      state.totalHarga = [...state.carts, action.payload].reduce(
+        (sum, el) => sum + el.subTotal,
+        0
+      );
+      state.totalQty = [...state.carts, action.payload].reduce(
+        (sum, el) => sum + el.qty,
+        0
+      );
+    }
   }
 });
 
-export const { doGetCart, doAddQty, doMinusQty, doDeleteCart, doAddCart } = cartSlice.actions;
+export const {
+  doGetCart,
+  doAddQty,
+  doMinusQty,
+  doDeleteCart,
+  doAddCart
+} = cartSlice.actions;
 export default cartSlice.reducer;
