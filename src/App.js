@@ -1,17 +1,13 @@
-import CartList from "./views/cart/cartList";
-import CartListToolkit from "./views/cart/CartListToolkit";
 import "./App.css";
+
+// import CartList from "./views/cart/CartList";
+// import CartListToolkit from "./views/cart/CartListToolkit";
+// import MainLayout from './layout/MainLayout';
+import Routes from "./Routes";
 
 function App() {
   return (
-    <>
-      {/*   <Counter />
-      <CounterArrow />
-      <CounterHook/> 
-      <CartList/>*/}
-
-      <CartListToolkit />
-    </>
+    <Routes/>
   );
 }
 
